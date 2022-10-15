@@ -1,0 +1,175 @@
+.navigation {
+  &__checkbox {
+    position: fixed;
+    top: 6rem;
+    right: 6rem;
+    opacity: 0;
+  }
+
+  &__button {
+    height: 7rem;
+    width: 7rem;
+    border-radius: 50%;
+    position: fixed;
+    top: 6rem;
+    right: 6rem;
+    background-color: $color-white;
+    z-index: 200;
+    box-shadow: 0 1rem 3rem rgba($color-black, 0.1);
+    //center inline-block like text (our hamburger menu)
+    text-align: center;
+    cursor: pointer;
+  }
+
+  &__background {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    position: fixed;
+    top: 6.5rem;
+    right: 6.5rem;
+    background-image: radial-gradient(
+      $color-primary-light,
+      $color-primary-dark
+    );
+    z-index: 100;
+    transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  &__nav {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 150;
+    //hacks to make them not targetable
+    //or move it outside of screen so wont be targeted with left: -25% and translate it 75% later
+    visibility: hidden;
+    opacity: 0;
+
+    //width can start from 0 or less
+    width: 100%;
+    transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  &__list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+    text-align: center;
+  }
+
+  &__item {
+    margin: 1rem;
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      display: inline-block;
+      font-size: 3rem;
+      font-weight: 300;
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+      background-image: linear-gradient(
+        120deg,
+        transparent 0%,
+        transparent 50%,
+        $color-white 50%
+      );
+      padding: 1rem 2rem;
+      //make the background so large that it only shows the transparent gradientm while white gradient is outside of the link
+      background-size: 220%;
+      transition: all 0.4s;
+
+      span {
+        margin-right: 1rem;
+        display: inline-block;
+      }
+    }
+
+    &:hover,
+    &:active {
+      background-position: 100%;
+      color: $color-primary;
+      transform: translateX(1rem);
+    }
+  }
+
+  &__checkbox:checked ~ &__background {
+    transform: scale(80);
+  }
+
+  &__checkbox:checked ~ &__nav {
+    opacity: 1;
+    // width: 100%; //change the width back to 100% if got use width:0%
+    visibility: visible;
+  }
+
+  //ICON
+  &__icon {
+    position: relative;
+    margin-top: 3.5rem;
+
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px; //no nid rem, we want it to be 2px regardless of fontsize
+      background: $color-grey-dark-3;
+      display: inline-block;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all 0.2s;
+    }
+
+    &::before {
+      top: -0.8rem;
+      //transform-origin: left means it will transform on the left, not on the default center
+    }
+
+    &::after {
+      top: 0.8rem;
+    }
+  }
+
+  &__checkbox:focus + &__button {
+    box-shadow: 0 0 2rem $color-primary-light, 0 0 5rem 2rem $color-white;
+    outline: 1rem solid $color-primary;
+  }
+
+  &__checkbox:focus + &__button &__icon::before,
+  &__button:hover &__icon::before {
+    top: -1rem;
+  }
+
+  &__checkbox:focus + &__button &__icon::after,
+  &__button:hover &__icon::after {
+    top: 1rem;
+  }
+
+  &__checkbox:checked + &__button &__icon {
+    //make the main element transparent, and proceed styling pseudoelement
+    background-color: transparent;
+  }
+
+  &__checkbox:checked + &__button &__icon::before {
+    transform: rotate(135deg);
+    //change it to 0 so that it lienes up with the ori icon
+    top: 0;
+  }
+
+  &__checkbox:checked + &__button &__icon::after {
+    transform: rotate(-135deg);
+    //change it to 0 so that it lienes up with the ori icon
+    top: 0;
+  }
+}
