@@ -40,7 +40,6 @@
             </ul>
         </nav>
 
-
     </div>
 
     <header class="header">
@@ -87,9 +86,24 @@
                 </div>
                 <div class="col-1-of-2">
                     <div class="composition">
-                        <img src="img/nat-1-large.jpg" alt="Photo 1" class="composition__photo composition__photo--p1">
+
+                        <!--for resolution switching (sizes=max width and the %,of original photo to the screen width with default size 300px), leave the src too in case user use old browser-->
+                        <img srcset="img/nat-1.jpg 300w, img/nat-1-large.jpg 1000w"
+                            sizes="(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vh, 300px" alt="Photo 1"
+                            class="composition__photo composition__photo--p1" src="img/nat-1-large.jpg">
+
+                        <img srcset="img/nat-2.jpg 300w, img/nat-2-large.jpg 1000w"
+                            sizes="(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vh, 300px" alt="Photo 2"
+                            class="composition__photo composition__photo--p2" src="img/nat-2-large.jpg">
+
+                        <img srcset="img/nat-3.jpg 300w, img/nat-3-large.jpg 1000w"
+                            sizes="(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vh, 300px" alt="Photo 3"
+                            class="composition__photo composition__photo--p3" src="img/nat-3-large.jpg">
+
+
+                        <!-- <img src="img/nat-1-large.jpg" alt="Photo 1" class="composition__photo composition__photo--p1">
                         <img src="img/nat-2-large.jpg" alt="Photo 2" class="composition__photo composition__photo--p2">
-                        <img src="img/nat-3-large.jpg" alt="Photo 3" class="composition__photo composition__photo--p3">
+                        <img src="img/nat-3-large.jpg" alt="Photo 3" class="composition__photo composition__photo--p3"> -->
                     </div>
                 </div>
             </div>
@@ -357,7 +371,18 @@
 
     <footer class="footer">
         <div class="footer__logo-box">
-            <img src="img/logo-green-2x.png" alt="Full logo" class="footer__logo">
+
+            <!-- for art direction switching when go to phone view-->
+            <picture class="footer__logo">
+                <!--smaller different photo for phone width and do density switching-->
+                <source srcset="img/logo-green-small-1x.png 1x, img/logo-green-small-2x.png 2x"
+                    media="(max-width:37.5em)">
+                <!--fallback to bigger photo and do density switching -->
+                <img srcset=" img/logo-green-1x.png 1x, img/logo-green-2x.png 2x" alt="Full logo"
+                    src="img/logo-green-2x.png">
+
+            </picture>
+
         </div>
         <div class="row">
             <div class="col-1-of-2">
@@ -400,6 +425,7 @@
                 <a href="#" class="btn btn--green">Book now!</a>
             </div>
         </div>
+        <a href="#dummy-anchor" class="popup__close--outer">&nbsp;</a>
     </div>
 
 

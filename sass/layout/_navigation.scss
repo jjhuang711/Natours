@@ -19,6 +19,18 @@
     //center inline-block like text (our hamburger menu)
     text-align: center;
     cursor: pointer;
+
+    //Make nav button more to the right for screen smaller than 900px
+    @include respond(tab-port) {
+      top: 4rem;
+      right: 4rem;
+    }
+
+    //Make nav button more to the right for screen smaller than 600px
+    @include respond(phone) {
+      top: 3rem;
+      right: 3rem;
+    }
   }
 
   &__background {
@@ -34,6 +46,18 @@
     );
     z-index: 100;
     transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+
+    //Make nav button more to the right for screen smaller than 900px
+    @include respond(tab-port) {
+      top: 4.5rem;
+      right: 4.5rem;
+    }
+
+    //Make nav button more to the right for screen smaller than 600px
+    @include respond(phone) {
+      top: 3.5rem;
+      right: 3.5rem;
+    }
   }
 
   &__nav {

@@ -181,4 +181,67 @@
     font-size: 6rem;
     font-weight: 100;
   }
+
+  //Because we basically rebuilding how the card looks like on smaller screen, there is a lot changes and it is better to put the media queries straight at the bottom.
+  //Instead of using include respond, we use direct one because we want to add condition to touch focused laptops or desktop (cannot do hover)
+  // @include respond(tab-port) {
+  @media only screen and (max-width: 56.25em), only screen and (hover: none) {
+    // FUNCTIONALITY
+
+    height: auto; //was added height after div collapsed as card__side set to position absolute. now not the case anymore. So put back to auto.
+
+    //set the whole background white to the card
+    background-color: $color-white;
+    //we dont want the box-shadow to be in the side now, instead should put in the card now.
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+    //apply border-radius on the card itself rather than the side
+    border-radius: 3rem;
+    //border-radius:0 on the side made it overflow the card itself, so use overflow hidden
+    overflow: hidden;
+
+    &__side {
+      height: auto;
+      //change back to relative because no longer need to line them up
+      position: relative;
+      //we dont want the box-shadow to be in the side now, instead should put in the card now.
+      box-shadow: none;
+      //set the border0radius on the side to 0, and put it in card itself instead
+      border-radius: 0;
+
+      &--back {
+        //change it back to 0deg because we dont want flip anymore
+        transform: rotateY(0);
+
+        //clip path the backside to make linking part has angle as well
+        -webkit-clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+        clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+      }
+    }
+
+    //front side should not hover anymore on small screen
+    &:hover &__side--front {
+      transform: rotateY(0);
+    }
+
+    &__details {
+      padding: 1rem 3rem;
+    }
+
+    // Front side styling same, so no need any change.
+    // BACK SIDE STYLING need to change for small screen
+    &__cta {
+      //change from absolute to relative and no need translate anymore
+      position: relative;
+      top: 0;
+      left: 0;
+      transform: translate(0);
+      width: 100%;
+      //add padding
+      padding: 7rem 4rem 4rem 4rem;
+    }
+
+    &__price-value {
+      font-size: 4rem;
+    }
+  }
 }

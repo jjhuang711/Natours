@@ -12,6 +12,9 @@
   visibility: hidden;
   transition: all 0.3s;
 
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+
   &__content {
     background-color: $color-white;
     width: 75%;
@@ -25,11 +28,24 @@
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.25);
     transition: all 0.5s 0.2s;
+
+    @include respond(tab-port) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 95%;
+    }
   }
 
   &__left {
     width: 33.3333%;
     display: table-cell;
+
+    @include respond(tab-port) {
+      width: 100%;
+      display: flex;
+      grid-row: 1;
+      grid-column: span 2;
+    }
   }
 
   &__right {
@@ -37,12 +53,23 @@
     display: table-cell;
     vertical-align: middle;
     padding: 3rem 5rem;
+
+    @include respond(tab-port) {
+      width: 100%;
+      display: block;
+      grid-column: span 2;
+    }
   }
 
   &__img {
     //set it to occupy full width
     display: block;
     width: 100%;
+
+    @include respond(tab-port) {
+      display: inline-block;
+      width: 50%;
+    }
   }
 
   &__text {
@@ -55,6 +82,10 @@
     column-rule: 1px solid $color-grey-light-2;
     -webkit-hyphens: auto;
     hyphens: auto;
+
+    @include respond(tab-port) {
+      column-count: 1;
+    }
   }
 
   //this means if the element is targeted by anchor, then select the element.
@@ -86,6 +117,13 @@
 
     &:hover {
       color: $color-primary;
+    }
+
+    &--outer {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: default;
     }
   }
 }
